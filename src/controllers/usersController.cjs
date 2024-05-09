@@ -3,7 +3,7 @@ const { statusCode } = require('../helpers/constants.cjs');
 
 const getCurrentUserHandler = async (req, res, next) => {
     try {
-        const { email } = req.body;
+        const { email } = req.user;
         const userData = await getUserData(email);
         if (!userData) {
             return next({
