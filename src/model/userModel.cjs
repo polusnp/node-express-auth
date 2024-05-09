@@ -31,6 +31,22 @@ const userSchema = new Schema(
                     `Password must be at least 8 characters long and contain only letters and numbers`,
             },
         },
+        phone: {
+            type: String,
+            validate: {
+                validator: function (value) {
+                    return /^(\+38)?\d{10}$/.test(value);
+                },
+                message: (props) => `${props.value} is not valid phone number!`,
+            },
+            required: true,
+        },
+        favoriteMovies: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Movie',
+            },
+        ],
     },
     {
         versionKey: false,
