@@ -1,12 +1,13 @@
 const { UnauthorizedException } = require('../helpers/exceptions.cjs');
 const jwt = require('jsonwebtoken');
 const { User } = require('../model/userModel.cjs');
-
-const JWT_SECRET = process.env.JWT_SECRET;
+require('dotenv').config();
 
 // Bearer token
 
 const authGuard = async (req, res, next) => {
+    const JWT_SECRET = process.env.JWT_SECRET;
+
     try {
         const token = req.headers?.authorization?.split(' ')[1];
         if (!token) {
